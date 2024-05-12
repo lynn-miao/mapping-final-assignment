@@ -1,7 +1,6 @@
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiY3dob25nIiwiYSI6IjAyYzIwYTJjYTVhMzUxZTVkMzdmYTQ2YzBmMTM0ZDAyIn0.owNd_Qa7Sw2neNJbK6zc1A';
 
-// instantiate the map using a bounding box instead of center point and zoom level
+// instantiate the map 
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v11',
@@ -12,21 +11,20 @@ const map = new mapboxgl.Map({
 // when the map is finished it's initial load, add sources and layers.
 map.on('load', function () {
 
-    // add a geojson source for the borough boundaries
+    // add a geojson source for the parcels
     map.addSource('west_village', {
         type: 'geojson',
         data: 'data/west_village.geojson',
         generateId: true // this will add an id to each feature, this is necessary if we want to use featureState (see below)
     })
 
-    // first add the fill layer, using a match expression to give each a unique color based on its boro_code property
+    // TODO: FILL BASED ON PENALTIES
     map.addLayer({
         id: 'west_village-fill',
         type: 'fill',
         source: 'west_village',
         paint: {
-            'fill-color': ['blue'
-            ],
+            'fill-color': 'steelblue',
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
                 'case',
@@ -37,7 +35,7 @@ map.on('load', function () {
         }
     })
 
-    // add borough outlines after the fill layer, so the outline is "on top" of the fill
+    // add parcel outlines after the fill layer, so the outline is "on top" of the fill
     map.addLayer({
         id: 'west_village-line',
         type: 'line',
@@ -50,7 +48,7 @@ map.on('load', function () {
     // this is a variable to store the id of the feature that is currently being hovered.
     let hoveredPolygonId = null
 
-    // whenever the mouse moves on the 'borough-boundaries-fill' layer, we check the id of the feature it is on top of, and set featureState for that feature.  The featureState we set is hover:true or hover:false
+    // whenever the mouse moves on the fill layer, we check the id of the feature it is on top of, and set featureState for that feature.  The featureState we set is hover:true or hover:false
     map.on('mousemove', 'west_village-fill', (e) => {
         // don't do anything if there are no features from this layer under the mouse pointer
         if (e.features.length > 0) {
@@ -94,50 +92,27 @@ map.on('load', function () {
         }
     });
 
-    // if the user clicks the 'borough-boundaries-fill' layer, extract properties from the clicked feature, using jQuery to write them to another part of the page.
+    // if the user clicks the fill layer, create popup
     map.on('click', 'west_village-fill', (e) => {
-        // get the boro_name from the first item in the array e.features
-        var boro_name = e.features[0].properties.boro_name
+
+        var address = e.features[0].properties.address
+        var propertyName = e.features[0].properties['LL84_Property Name']
+        console.log(address)
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.address + ' <p>(' + propertyName + ')')
+            .addTo(map);
+    });
+    
+    
+    //
+//    map.on('click', 'west_village-fill', (e) => {
+        // get the address from the first item in the array e.features
+ //       var address = e.features[0].properties.address
+  //      console.log(address)
 
         // insert the borough name into the sidebar using jQuery
-        $('#borough').text(`You clicked ${boro_name}!`)
-    });
-
-
-    // listen for a click on a specific button and use flyTo to change the map's camera view.
-    $('#staten-island-button').on('click', function () {
-        map.flyTo({
-            center: [-74.15234, 40.57932],
-            zoom: 9,
-            duration: 1500
-        })
-    })
-
-    // listen for a click on a specific button and use fitBounds to change the map's camera view.
-    $('#manhattan-button').on('click', function () {
-        map.fitBounds([[-74.05050, 40.69046], [-73.90017, 40.87610]])
-    })
-
-    // add a variable to keep track of the visible state of the borough layers
-    let boroughsVisible = true
-
-    // when the toggle button is clicked, check boroughsVisible to get the current visibility state, update the layer visibility to reflect the opposite of the current state.
-    $('#borough-toggle').on('click', function () {
-
-        // by default we will set the layers to visible
-        let value = 'visible'
-
-        // if the layers are already visible, set their visibility to 'none'
-        if (boroughsVisible === true) {
-            value = 'none'
-        }
-
-        // use setLayoutProperty to apply the visibility (either 'visible' or 'none' depending on the logic above)
-        map.setLayoutProperty('borough-boundaries-fill', 'visibility', value)
-        map.setLayoutProperty('borough-boundaries-line', 'visibility', value)
-
-        // flip the value in boroughsVisible to reflect the new state. (if true, it becomes false, if false it becomes true)
-        boroughsVisible = !boroughsVisible
-    })
+    //    $('#address').text(`You clicked ${address}!`)
+    // }); --!>
 
 })
