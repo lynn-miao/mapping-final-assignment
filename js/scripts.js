@@ -18,11 +18,14 @@ map.on('load', function () {
         generateId: true // this will add an id to each feature, this is necessary if we want to use featureState (see below)
     })
 
+    
+    
     // TODO: FILL BASED ON PENALTIES
     map.addLayer({
         id: 'west_village-fill',
         type: 'fill',
         source: 'west_village',
+        filter: ['to-boolean',['get','LL84_2030-2034 Penalties']],
         paint: {
             'fill-color': 'steelblue',
             // use a case expression to set the opacity of a polygon based on featureState
@@ -96,23 +99,15 @@ map.on('load', function () {
     map.on('click', 'west_village-fill', (e) => {
 
         var address = e.features[0].properties.address
-        var propertyName = e.features[0].properties['LL84_Property Name']
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+        var penalty_2024 = e.features[0].properties['LL84_2024-2029 Penalty']
+        var penalty_2030 = e.features[0].properties['LL84_2030-2034 Penalties']
         console.log(address)
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(e.features[0].properties.address + ' <p>(' + propertyName + ')')
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties 2024: $' + penalty_2024 + '<p>Penalties 2030: $' + penalty_2030)
             .addTo(map);
     });
     
     
-    //
-//    map.on('click', 'west_village-fill', (e) => {
-        // get the address from the first item in the array e.features
- //       var address = e.features[0].properties.address
-  //      console.log(address)
-
-        // insert the borough name into the sidebar using jQuery
-    //    $('#address').text(`You clicked ${address}!`)
-    // }); --!>
-
 })
