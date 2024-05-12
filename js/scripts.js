@@ -20,14 +20,18 @@ map.on('load', function () {
 
     
     
-    // TODO: FILL BASED ON PENALTIES
+    // create layer, shaded by the penalty amt
     map.addLayer({
         id: 'west_village-fill',
         type: 'fill',
         source: 'west_village',
         filter: ['to-boolean',['get','LL84_2030-2034 Penalties']],
         paint: {
-            'fill-color': 'steelblue',
+            'fill-color': {
+                
+                property: 'LL84_2024-2029 Penalty',
+                stops: [[1, '#fee5d9'],[5000, '#fcbba1'], [10000, '#fc9272'], [50000, '#fb6a4a'], [100000, '#de2d26'], [500000, '#a50f15']]
+            },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
                 'case',
