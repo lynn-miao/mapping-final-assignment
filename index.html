@@ -13,7 +13,8 @@
 <body>
     <div id="main-container">
         <nav>
-            <div class="title">The Road to Zero Emissions: Find Out How Much Your Building May Be Fined Under Local Law 97</div>
+            <div class="title">The Road to Zero Emissions: Find Out How Much Your Building May Be Fined Under Local Law
+                97</div>
             <div class="nav-links">
                 <a class="nav-link" href="https://github.com/lynn-miao/mapping-final-assignment" target="_blank"
                     rel="noopener noreferrer">Github</a>
@@ -21,15 +22,42 @@
         </nav>
         <div id="content-container">
             <div id="sidebar">
-                Buildings in New York are the largest source of greenhouse gas, contributing 71% of total emissions and 94% of electricity consumption. In order for the city to achieve its goal of reducing emissions by 80 percent by 2050, it must tackle its infrastructure.</p>
-                <p>To tackle this problem, City Council passed Local Law 97, which will begin issuing fines in 2024. Buildings will be required to reduce their emissions or face increasing penalties. </p>
+                Buildings in New York are the largest source of greenhouse gas, contributing 71% of total emissions and
+                94% of electricity consumption. In order for the city to achieve its goal of reducing emissions by 80
+                percent by 2050, it must tackle its infrastructure.</p>
+                <p>To tackle this problem, City Council passed Local Law 97, which will begin issuing fines in 2024.
+                    Buildings larger than 25,000 sq. ft. will be required to reduce their emissions or face increasing
+                    penalties. </p>
                 <div id="line_name">
-                    Penalties are determined by the emissions amount and type, and emissions limit will decrease over five phases to zero by 2050. 
+                    Penalties are determined by the emissions amount and type, and emissions limit will decrease over
+                    five phases to zero by 2050.
                 </div>
-                <!--TODO METHODOLOGY BOX-->
+                <div class="question-button" id="question1">
+                    Methodology
+                </div>
+                <br />
+                <div class="answer" id="answer1">Emissions are measured using a building’s gas, fuel, and electricity
+                    consumption, and limits are calculated by square footage and property usage type. <p>To calculate
+                        each building's estimated penalties, I used emissions and benchmarking data from mandated by
+                        Local Law 84, that requires buildings to report on their energy and water usage using national
+                        standards for reporting, in this case through the EPA's online tool "Energy Star Portfolio
+                        Manager."
+                    <p>I downloaded the data from NYC Open Data, calculated the emissions limits based on property type
+                        and square footage in Excel for buildings greater than 25,000 square feet, compared the limit to
+                        the permitted amount by property type and square footage, and then calculated the penalties
+                        based on the amount of excess emissions.
+                    </p>
+                    <p></p>
+                    <a href="https://www.nyc.gov/assets/buildings/rules/rule-procedures-greenhouse-gas-emissions-proposed.pdf"
+                        target="_blank" rel="nofollow">
+                        Link to emissions limits by property type
+                    </a>
+                </div>
                 <hr />
+
                 <!-- UPDATE COLORS and CSS-->
-                <div class="description-text">TODO HOVER?? Find out the annual penalties for each building by phase</div>
+                <div class="description-text">TODO HOVER?? Find out the annual penalties for each building by phase
+                </div>
                 <p><button class="button-18" id="phase2024-button">2024 to 2029</button></p>
                 <p><button class="button-18" id="phase2030-button">2030 to 2034</button></p>
                 <p><button class="button-18" id="phase2035-button">2035-2039</button></p>
@@ -45,8 +73,8 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-        
-        <script src="js/scripts.js"></script>"
+
+    <script src="js/scripts.js"></script>"
 
 </body>
 

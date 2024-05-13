@@ -22,7 +22,7 @@ map.on('load', function () {
     
     // create layer, shaded by the penalty amt
     map.addLayer({
-        id: 'west_village-fill',
+        id: 'west_village-fill-2024',
         type: 'fill',
         source: 'west_village',
         filter: ['to-boolean',['get','LL84_2024-2029 Penalty']],
@@ -30,7 +30,7 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2024-2029 Penalty',
-                stops: [[1, '#fee5d9'],[5000, '#fcbba1'], [10000, '#fc9272'], [50000, '#fb6a4a'], [100000, '#de2d26'], [500000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -52,7 +52,73 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2030-2034 Penalties',
-                stops: [[1, '#fee5d9'],[5000, '#fcbba1'], [10000, '#fc9272'], [50000, '#fb6a4a'], [100000, '#de2d26'], [500000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+            },
+            // use a case expression to set the opacity of a polygon based on featureState
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                1,  // opacity when hover is false
+                0.5 // opacity when hover is true
+            ]
+        }
+    })
+
+    // create layer, shaded by the penalty amt
+    map.addLayer({
+        id: 'west_village-fill-2035',
+        type: 'fill',
+        source: 'west_village',
+        filter: ['to-boolean',['get','LL84_2035-2039 Penalties']],
+        layout: {'visibility': 'none'},
+        paint: {
+            'fill-color': {
+                property: 'LL84_2035-2039 Penalties',
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+            },
+            // use a case expression to set the opacity of a polygon based on featureState
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                1,  // opacity when hover is false
+                0.5 // opacity when hover is true
+            ]
+        }
+    })
+
+    // create layer, shaded by the penalty amt
+    map.addLayer({
+        id: 'west_village-fill-2040',
+        type: 'fill',
+        source: 'west_village',
+        filter: ['to-boolean',['get','LL84_2040-2049 Penalties']],
+        layout: {'visibility': 'none'},
+        paint: {
+            'fill-color': {
+                property: 'LL84_2040-2049 Penalties',
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+            },
+            // use a case expression to set the opacity of a polygon based on featureState
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                1,  // opacity when hover is false
+                0.5 // opacity when hover is true
+            ]
+        }
+    })
+
+    // create layer, shaded by the penalty amt
+    map.addLayer({
+        id: 'west_village-fill-2050',
+        type: 'fill',
+        source: 'west_village',
+        filter: ['to-boolean',['get','LL84_2050 Penalty']],
+        layout: {'visibility': 'none'},
+        paint: {
+            'fill-color': {
+                property: 'LL84_2050 Penalty',
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -77,8 +143,9 @@ map.on('load', function () {
     // this is a variable to store the id of the feature that is currently being hovered.
     let hoveredPolygonId = null
 
+    // UPDATE THIS
     // whenever the mouse moves on the fill layer, we check the id of the feature it is on top of, and set featureState for that feature.  The featureState we set is hover:true or hover:false
-    map.on('mousemove', 'west_village-fill', (e) => {
+    map.on('mousemove', 'west_village-fill-2050', (e) => {
         // don't do anything if there are no features from this layer under the mouse pointer
         if (e.features.length > 0) {
             // if hoveredPolygonId already has an id in it, set the featureState for that id to hover: false
@@ -102,7 +169,7 @@ map.on('load', function () {
             map.getCanvas().style.cursor = 'pointer'
 
             // resets the feature state to the default (nothing is hovered) when the mouse leaves the 'borough-boundaries-fill' layer
-            map.on('mouseleave', 'west_village-fill', () => {
+            map.on('mouseleave', 'west_village-fill-2050', () => {
                 // set the featureState of the previous hovered feature to hover:false
                 if (hoveredPolygonId !== null) {
                     map.setFeatureState(
@@ -121,10 +188,8 @@ map.on('load', function () {
         }
     });
 
-    
-
     // if the user clicks the fill layer, create popup
-    map.on('click', 'west_village-fill', (e) => {
+    map.on('click', 'west_village-fill-2024', (e) => {
 
         var penalty_2024 = e.features[0].properties['LL84_2024-2029 Penalty']
         var penalty_2030 = e.features[0].properties['LL84_2030-2034 Penalties']
@@ -142,15 +207,58 @@ map.on('load', function () {
     // CODE to toggle between layers
     // listen for a click on a specific button 
     $('#phase2024-button').on('click', function () {
-        map.setLayoutProperty('west_village-fill', 'visibility', 'visible');
+        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'visible');
         map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2035', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2040', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2050', 'visibility', 'none');
     });
 
     // listen for a click on a specific button 
     $('#phase2030-button').on('click', function () {
+        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2030', 'visibility', 'visible');
-        map.setLayoutProperty('west_village-fill', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2035', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2040', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2050', 'visibility', 'none');
         ;
+    });
+
+    // listen for a click on a specific button 
+    $('#phase2035-button').on('click', function () {
+        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2035', 'visibility', 'visible');
+        map.setLayoutProperty('west_village-fill-2040', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2050', 'visibility', 'none');
+    });
+
+    // listen for a click on a specific button 
+    $('#phase2040-button').on('click', function () {
+        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2035', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2040', 'visibility', 'visible');
+        map.setLayoutProperty('west_village-fill-2050', 'visibility', 'none');
+        ;
+    });
+
+    // listen for a click on a specific button 
+    $('#phase2050-button').on('click', function () {
+        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2035', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2040', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2050', 'visibility', 'visible');
+        ;
+    });
+
+
+    $(document).ready(function(){
+        $('.question-button').on('click', function(){
+            var questionId = $(this).attr('id').replace('question', '');
+            $("#answer" + questionId).toggle();
+        });
     });
     
 })
