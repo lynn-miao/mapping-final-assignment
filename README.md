@@ -2,7 +2,8 @@
 NYU Wagner <br>
 Spring 2024 <br>
 Advanced GIS and Web Mapping <br>
-Final Project 
+Final Project <br>
+Lynn Miao
 <br>
 <br>
 In 2014, City Council passed Local Law 97, requiring buildings over 25,000 square feet to cut their emissions gradually to zero emissions by 2050. This is a necessary step for the broader commitment to cut emissions by 80% by 2050, since buildings contribute to 71% of New York City's greenhouse gas emissions. 
