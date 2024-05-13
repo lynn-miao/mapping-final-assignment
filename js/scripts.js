@@ -121,17 +121,21 @@ map.on('load', function () {
         }
     });
 
+    
+
     // if the user clicks the fill layer, create popup
     map.on('click', 'west_village-fill', (e) => {
 
-        var address = e.features[0].properties.address
-        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
         var penalty_2024 = e.features[0].properties['LL84_2024-2029 Penalty']
         var penalty_2030 = e.features[0].properties['LL84_2030-2034 Penalties']
+        
+        var address = e.features[0].properties.address
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+        
         console.log(address)
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties 2024: $' + penalty_2024 + '<p>Penalties 2030: $' + penalty_2030)
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties 2024: $' + penalty_2024.toLocaleString('en-US') + '<p>Penalties 2030: $' + penalty_2030.toLocaleString('en-US'))
             .addTo(map);
     });
     
