@@ -18,19 +18,21 @@ map.on('load', function () {
         generateId: true // this will add an id to each feature, this is necessary if we want to use featureState (see below)
     })
 
-    
-    
+    /////////// create layers, one for each phase, shaded by penalty amt
+
     // create layer, shaded by the penalty amt
     map.addLayer({
         id: 'west_village-fill-2024',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean',['get','LL84_2024-2029 Penalty']],
-        layout: {'visibility': 'none'},
+        filter: ['to-boolean', ['get', 'LL84_2024-2029 Penalty']],
+        // set default visibility to none, unless clicked by button
+        layout: { 'visibility': 'none' },
         paint: {
+            // shade based on penalty amt
             'fill-color': {
                 property: 'LL84_2024-2029 Penalty',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
+                stops: [[1, '#fee5d9'], [10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -41,18 +43,18 @@ map.on('load', function () {
             ]
         }
     })
-
+    
     // create layer, shaded by the penalty amt
     map.addLayer({
         id: 'west_village-fill-2030',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean',['get','LL84_2030-2034 Penalties']],
-        layout: {'visibility': 'none'},
+        filter: ['to-boolean', ['get', 'LL84_2030-2034 Penalties']],
+        layout: { 'visibility': 'none' },
         paint: {
             'fill-color': {
                 property: 'LL84_2030-2034 Penalties',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
+                stops: [[1, '#fee5d9'], [10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -69,12 +71,12 @@ map.on('load', function () {
         id: 'west_village-fill-2035',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean',['get','LL84_2035-2039 Penalties']],
-        layout: {'visibility': 'none'},
+        filter: ['to-boolean', ['get', 'LL84_2035-2039 Penalties']],
+        layout: { 'visibility': 'none' },
         paint: {
             'fill-color': {
                 property: 'LL84_2035-2039 Penalties',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
+                stops: [[1, '#fee5d9'], [10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -91,12 +93,12 @@ map.on('load', function () {
         id: 'west_village-fill-2040',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean',['get','LL84_2040-2049 Penalties']],
-        layout: {'visibility': 'none'},
+        filter: ['to-boolean', ['get', 'LL84_2040-2049 Penalties']],
+        layout: { 'visibility': 'none' },
         paint: {
             'fill-color': {
                 property: 'LL84_2040-2049 Penalties',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
+                stops: [[1, '#fee5d9'], [10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -113,12 +115,12 @@ map.on('load', function () {
         id: 'west_village-fill-2050',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean',['get','LL84_2050 Penalty']],
-        layout: {'visibility': 'none'},
+        filter: ['to-boolean', ['get', 'LL84_2050 Penalty']],
+        layout: { 'visibility': 'none' },
         paint: {
             'fill-color': {
                 property: 'LL84_2050 Penalty',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
+                stops: [[1, '#fee5d9'], [10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -138,7 +140,8 @@ map.on('load', function () {
         paint: {
             'line-color': '#6b6b6b'
         },
-        filter: ['to-boolean',['get','LL84_2050 Penalty']],
+        // filter to only parcels that are covered by LL97
+        filter: ['to-boolean', ['get', 'LL84_2050 Penalty']],
     })
 
     // this is a variable to store the id of the feature that is currently being hovered.
@@ -180,7 +183,7 @@ map.on('load', function () {
 
                 // clear hoveredPolygonId
                 hoveredPolygonId = null;
-                
+
                 // set the cursor back to default
                 map.getCanvas().style.cursor = ''
             });
@@ -196,7 +199,7 @@ map.on('load', function () {
         var excess = e.features[0].properties['LL84_2024-2029 Excess Emissions']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
-            new mapboxgl.Popup()
+        new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
             .addTo(map);
@@ -208,7 +211,7 @@ map.on('load', function () {
         var excess = e.features[0].properties['LL84_2030-2034 Emissions Excess']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
-            new mapboxgl.Popup()
+        new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
             .addTo(map);
@@ -220,7 +223,7 @@ map.on('load', function () {
         var excess = e.features[0].properties['LL84_2035-2039 Emissions Excess']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
-            new mapboxgl.Popup()
+        new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
             .addTo(map);
@@ -232,7 +235,7 @@ map.on('load', function () {
         var excess = e.features[0].properties['LL84_2040-2049 Emissions Excess']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
-            new mapboxgl.Popup()
+        new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
             .addTo(map);
@@ -243,7 +246,7 @@ map.on('load', function () {
         var penalty = e.features[0].properties['LL84_2050 Penalty']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
-            new mapboxgl.Popup()
+        new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Expected 0 emissions')
             .addTo(map);
@@ -299,11 +302,11 @@ map.on('load', function () {
     });
 
 
-    $(document).ready(function(){
-        $('.question-button').on('click', function(){
+    $(document).ready(function () {
+        $('.question-button').on('click', function () {
             var questionId = $(this).attr('id').replace('question', '');
             $("#answer" + questionId).toggle();
         });
     });
-    
+
 })
