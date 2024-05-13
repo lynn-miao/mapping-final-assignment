@@ -30,7 +30,7 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2024-2029 Penalty',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -52,7 +52,7 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2030-2034 Penalties',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -74,7 +74,7 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2035-2039 Penalties',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -96,7 +96,7 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2040-2049 Penalties',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -118,7 +118,7 @@ map.on('load', function () {
         paint: {
             'fill-color': {
                 property: 'LL84_2050 Penalty',
-                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [500000, '#de2d26'], [1000000, '#a50f15']]
+                stops: [[1, '#fee5d9'],[10000, '#fcbba1'], [50000, '#fc9272'], [100000, '#fb6a4a'], [150000, '#de2d26'], [250000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
             'fill-opacity': [
@@ -137,13 +137,13 @@ map.on('load', function () {
         source: 'west_village',
         paint: {
             'line-color': '#6b6b6b'
-        }
+        },
+        filter: ['to-boolean',['get','LL84_2050 Penalty']],
     })
 
     // this is a variable to store the id of the feature that is currently being hovered.
     let hoveredPolygonId = null
 
-    // UPDATE THIS
     // whenever the mouse moves on the fill layer, we check the id of the feature it is on top of, and set featureState for that feature.  The featureState we set is hover:true or hover:false
     map.on('mousemove', 'west_village-fill-2050', (e) => {
         // don't do anything if there are no features from this layer under the mouse pointer
@@ -192,7 +192,6 @@ map.on('load', function () {
 
     // 2024 layer
     map.on('click', 'west_village-fill-2024', (e) => {
-
         var penalty = e.features[0].properties['LL84_2024-2029 Penalty']
         var excess = e.features[0].properties['LL84_2024-2029 Excess Emissions']
         var address = e.features[0].properties.address
@@ -205,7 +204,6 @@ map.on('load', function () {
 
     // 2030 layer
     map.on('click', 'west_village-fill-2030', (e) => {
-
         var penalty = e.features[0].properties['LL84_2030-2034 Penalties']
         var excess = e.features[0].properties['LL84_2030-2034 Emissions Excess']
         var address = e.features[0].properties.address
@@ -218,7 +216,6 @@ map.on('load', function () {
 
     // 2035 layer
     map.on('click', 'west_village-fill-2035', (e) => {
-
         var penalty = e.features[0].properties['LL84_2035-2039 Penalties']
         var excess = e.features[0].properties['LL84_2035-2039 Emissions Excess']
         var address = e.features[0].properties.address
@@ -231,7 +228,6 @@ map.on('load', function () {
 
     // 2040 layer
     map.on('click', 'west_village-fill-2040', (e) => {
-
         var penalty = e.features[0].properties['LL84_2040-2049 Penalties']
         var excess = e.features[0].properties['LL84_2040-2049 Emissions Excess']
         var address = e.features[0].properties.address
@@ -244,7 +240,6 @@ map.on('load', function () {
 
     // 2050 layer
     map.on('click', 'west_village-fill-2050', (e) => {
-
         var penalty = e.features[0].properties['LL84_2050 Penalty']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']

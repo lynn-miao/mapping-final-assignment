@@ -127,57 +127,37 @@ nav {
 }
 
 #phase2024-button {
-    background-color: #EE352E;
-    color: white;
+    background-color: #edf8e9;
+    color: black;
     /* This sets the text color to white to improve visibility */
 }
 
 #phase2030-button {
-    background-color: #0039A6;
+    background-color: #bae4b3;
+    color: black;
+}
+
+#phase2035-button {
+    background-color: #74c476;
+    color: black;
+}
+
+#phase2040-button {
+    background-color: #31a354;
     color: white;
 }
 
-#lineBDFM-button {
-    background-color: #FF6319;
+#phase2050-button {
+    background-color: #006d2c;
     color: white;
 }
-
-#lineG-button {
-    background-color: #6CBE45;
-    color: white;
-}
-
-#lineJZ-button {
-    background-color: #996633;
-    color: white;
-}
-
-#lineL-button {
-    background-color: #A7A9AC;
-    color: white;
-}
-
-#lineNQRW-button {
-    background-color: #FCCC0A;
-    color: white;
-}
-
-#line456-button {
-    background-color: #00933C;
-    color: white;
-}
-
-#line7-button {
-    background-color: #B933AD;
-    color: white;
-}
-
 
 /* styles for text areas in the sidebar */
 #line_name,
 .description-text {
     font-size: 14px;
     margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .subway-line.active {
