@@ -188,22 +188,72 @@ map.on('load', function () {
         }
     });
 
-    // if the user clicks the fill layer, create popup
+    // if the user clicks the fill layer, create popup for different layers
+
+    // 2024 layer
     map.on('click', 'west_village-fill-2024', (e) => {
 
-        var penalty_2024 = e.features[0].properties['LL84_2024-2029 Penalty']
-        var penalty_2030 = e.features[0].properties['LL84_2030-2034 Penalties']
-        
+        var penalty = e.features[0].properties['LL84_2024-2029 Penalty']
+        var excess = e.features[0].properties['LL84_2024-2029 Excess Emissions']
         var address = e.features[0].properties.address
         var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
-        
-        console.log(address)
-        new mapboxgl.Popup()
+            new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties 2024: $' + penalty_2024.toLocaleString('en-US') + '<p>Penalties 2030: $' + penalty_2030.toLocaleString('en-US'))
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
             .addTo(map);
     });
-    
+
+    // 2030 layer
+    map.on('click', 'west_village-fill-2030', (e) => {
+
+        var penalty = e.features[0].properties['LL84_2030-2034 Penalties']
+        var excess = e.features[0].properties['LL84_2030-2034 Emissions Excess']
+        var address = e.features[0].properties.address
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+            new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
+            .addTo(map);
+    });
+
+    // 2035 layer
+    map.on('click', 'west_village-fill-2035', (e) => {
+
+        var penalty = e.features[0].properties['LL84_2035-2039 Penalties']
+        var excess = e.features[0].properties['LL84_2035-2039 Emissions Excess']
+        var address = e.features[0].properties.address
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+            new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
+            .addTo(map);
+    });
+
+    // 2040 layer
+    map.on('click', 'west_village-fill-2040', (e) => {
+
+        var penalty = e.features[0].properties['LL84_2040-2049 Penalties']
+        var excess = e.features[0].properties['LL84_2040-2049 Emissions Excess']
+        var address = e.features[0].properties.address
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+            new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
+            .addTo(map);
+    });
+
+    // 2050 layer
+    map.on('click', 'west_village-fill-2050', (e) => {
+
+        var penalty = e.features[0].properties['LL84_2050 Penalty']
+        var address = e.features[0].properties.address
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+            new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Expected 0 emissions')
+            .addTo(map);
+    });
+
     // CODE to toggle between layers
     // listen for a click on a specific button 
     $('#phase2024-button').on('click', function () {
