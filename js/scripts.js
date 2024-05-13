@@ -25,11 +25,33 @@ map.on('load', function () {
         id: 'west_village-fill',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean',['get','LL84_2030-2034 Penalties']],
+        filter: ['to-boolean',['get','LL84_2024-2029 Penalty']],
+        layout: {'visibility': 'none'},
         paint: {
             'fill-color': {
-                
                 property: 'LL84_2024-2029 Penalty',
+                stops: [[1, '#fee5d9'],[5000, '#fcbba1'], [10000, '#fc9272'], [50000, '#fb6a4a'], [100000, '#de2d26'], [500000, '#a50f15']]
+            },
+            // use a case expression to set the opacity of a polygon based on featureState
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                1,  // opacity when hover is false
+                0.5 // opacity when hover is true
+            ]
+        }
+    })
+
+    // create layer, shaded by the penalty amt
+    map.addLayer({
+        id: 'west_village-fill-2030',
+        type: 'fill',
+        source: 'west_village',
+        filter: ['to-boolean',['get','LL84_2030-2034 Penalties']],
+        layout: {'visibility': 'none'},
+        paint: {
+            'fill-color': {
+                property: 'LL84_2030-2034 Penalties',
                 stops: [[1, '#fee5d9'],[5000, '#fcbba1'], [10000, '#fc9272'], [50000, '#fb6a4a'], [100000, '#de2d26'], [500000, '#a50f15']]
             },
             // use a case expression to set the opacity of a polygon based on featureState
@@ -113,5 +135,18 @@ map.on('load', function () {
             .addTo(map);
     });
     
+    // CODE to toggle between layers
+    // listen for a click on a specific button 
+    $('#phase2024-button').on('click', function () {
+        map.setLayoutProperty('west_village-fill', 'visibility', 'visible');
+        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
+    });
+
+    // listen for a click on a specific button 
+    $('#phase2030-button').on('click', function () {
+        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'visible');
+        map.setLayoutProperty('west_village-fill', 'visibility', 'none');
+        ;
+    });
     
 })
