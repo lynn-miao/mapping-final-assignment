@@ -175,8 +175,8 @@ nav {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-  }
-  
-  .answer {
+}
+
+.answer {
     display: none;
-  }
+}

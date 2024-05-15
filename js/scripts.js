@@ -18,16 +18,15 @@ map.on('load', function () {
         generateId: true // this will add an id to each feature, this is necessary if we want to use featureState (see below)
     })
 
-    /////////// create layers, one for each phase, shaded by penalty amt
+    /******* Create layers, one for each phase *******/ 
 
-    // create layer, shaded by the penalty amt
+    // create 2024 layer
     map.addLayer({
         id: 'west_village-fill-2024',
         type: 'fill',
         source: 'west_village',
-        filter: ['to-boolean', ['get', 'LL84_2024-2029 Penalty']],
-        // set default visibility to none, unless clicked by button
-        layout: { 'visibility': 'none' },
+        filter: ['to-boolean', ['get', 'LL84_2024-2029 Penalty']], // filter to only parcels that will be impacted by this penalty phase
+        layout: { 'visibility': 'none' }, // set default visibility to none, unless clicked by button
         paint: {
             // shade based on penalty amt
             'fill-color': {
@@ -44,7 +43,7 @@ map.on('load', function () {
         }
     })
     
-    // create layer, shaded by the penalty amt
+    // create 2030
     map.addLayer({
         id: 'west_village-fill-2030',
         type: 'fill',
@@ -66,7 +65,7 @@ map.on('load', function () {
         }
     })
 
-    // create layer, shaded by the penalty amt
+    // create 2035 layer
     map.addLayer({
         id: 'west_village-fill-2035',
         type: 'fill',
@@ -88,7 +87,7 @@ map.on('load', function () {
         }
     })
 
-    // create layer, shaded by the penalty amt
+    // create 2040 layer
     map.addLayer({
         id: 'west_village-fill-2040',
         type: 'fill',
@@ -110,7 +109,7 @@ map.on('load', function () {
         }
     })
 
-    // create layer, shaded by the penalty amt
+    // create 2050 layer
     map.addLayer({
         id: 'west_village-fill-2050',
         type: 'fill',
@@ -148,6 +147,183 @@ map.on('load', function () {
     let hoveredPolygonId = null
 
     // whenever the mouse moves on the fill layer, we check the id of the feature it is on top of, and set featureState for that feature.  The featureState we set is hover:true or hover:false
+    // do this for the 2024 layer
+    map.on('mousemove', 'west_village-fill-2024', (e) => {
+        // don't do anything if there are no features from this layer under the mouse pointer
+        if (e.features.length > 0) {
+            // if hoveredPolygonId already has an id in it, set the featureState for that id to hover: false
+            if (hoveredPolygonId !== null) {
+                map.setFeatureState(
+                    { source: 'west_village', id: hoveredPolygonId },
+                    { hover: false }
+                );
+            }
+
+            // set hoveredPolygonId to the id of the feature currently being hovered
+            hoveredPolygonId = e.features[0].id;
+
+            // set the featureState of this feature to hover:true
+            map.setFeatureState(
+                { source: 'west_village', id: hoveredPolygonId },
+                { hover: true }
+            );
+
+            // make the cursor a pointer to let the user know it is clickable
+            map.getCanvas().style.cursor = 'pointer'
+
+            // resets the feature state to the default (nothing is hovered) when the mouse leaves the 'borough-boundaries-fill' layer
+            map.on('mouseleave', 'west_village-fill-2024', () => {
+                // set the featureState of the previous hovered feature to hover:false
+                if (hoveredPolygonId !== null) {
+                    map.setFeatureState(
+                        { source: 'west_village', id: hoveredPolygonId },
+                        { hover: false }
+                    );
+                }
+
+                // clear hoveredPolygonId
+                hoveredPolygonId = null;
+
+                // set the cursor back to default
+                map.getCanvas().style.cursor = ''
+            });
+
+        }
+    });
+
+    // do this for the 2030 layer
+    map.on('mousemove', 'west_village-fill-2030', (e) => {
+        // don't do anything if there are no features from this layer under the mouse pointer
+        if (e.features.length > 0) {
+            // if hoveredPolygonId already has an id in it, set the featureState for that id to hover: false
+            if (hoveredPolygonId !== null) {
+                map.setFeatureState(
+                    { source: 'west_village', id: hoveredPolygonId },
+                    { hover: false }
+                );
+            }
+
+            // set hoveredPolygonId to the id of the feature currently being hovered
+            hoveredPolygonId = e.features[0].id;
+
+            // set the featureState of this feature to hover:true
+            map.setFeatureState(
+                { source: 'west_village', id: hoveredPolygonId },
+                { hover: true }
+            );
+
+            // make the cursor a pointer to let the user know it is clickable
+            map.getCanvas().style.cursor = 'pointer'
+
+            // resets the feature state to the default (nothing is hovered) when the mouse leaves the 'borough-boundaries-fill' layer
+            map.on('mouseleave', 'west_village-fill-2030', () => {
+                // set the featureState of the previous hovered feature to hover:false
+                if (hoveredPolygonId !== null) {
+                    map.setFeatureState(
+                        { source: 'west_village', id: hoveredPolygonId },
+                        { hover: false }
+                    );
+                }
+
+                // clear hoveredPolygonId
+                hoveredPolygonId = null;
+
+                // set the cursor back to default
+                map.getCanvas().style.cursor = ''
+            });
+
+        }
+    });
+
+    // do this for the 2035 layer
+    map.on('mousemove', 'west_village-fill-2035', (e) => {
+        // don't do anything if there are no features from this layer under the mouse pointer
+        if (e.features.length > 0) {
+            // if hoveredPolygonId already has an id in it, set the featureState for that id to hover: false
+            if (hoveredPolygonId !== null) {
+                map.setFeatureState(
+                    { source: 'west_village', id: hoveredPolygonId },
+                    { hover: false }
+                );
+            }
+
+            // set hoveredPolygonId to the id of the feature currently being hovered
+            hoveredPolygonId = e.features[0].id;
+
+            // set the featureState of this feature to hover:true
+            map.setFeatureState(
+                { source: 'west_village', id: hoveredPolygonId },
+                { hover: true }
+            );
+
+            // make the cursor a pointer to let the user know it is clickable
+            map.getCanvas().style.cursor = 'pointer'
+
+            // resets the feature state to the default (nothing is hovered) when the mouse leaves the 'borough-boundaries-fill' layer
+            map.on('mouseleave', 'west_village-fill-2035', () => {
+                // set the featureState of the previous hovered feature to hover:false
+                if (hoveredPolygonId !== null) {
+                    map.setFeatureState(
+                        { source: 'west_village', id: hoveredPolygonId },
+                        { hover: false }
+                    );
+                }
+
+                // clear hoveredPolygonId
+                hoveredPolygonId = null;
+
+                // set the cursor back to default
+                map.getCanvas().style.cursor = ''
+            });
+
+        }
+    });
+
+    // do this for the 2040 layer
+    map.on('mousemove', 'west_village-fill-2040', (e) => {
+        // don't do anything if there are no features from this layer under the mouse pointer
+        if (e.features.length > 0) {
+            // if hoveredPolygonId already has an id in it, set the featureState for that id to hover: false
+            if (hoveredPolygonId !== null) {
+                map.setFeatureState(
+                    { source: 'west_village', id: hoveredPolygonId },
+                    { hover: false }
+                );
+            }
+
+            // set hoveredPolygonId to the id of the feature currently being hovered
+            hoveredPolygonId = e.features[0].id;
+
+            // set the featureState of this feature to hover:true
+            map.setFeatureState(
+                { source: 'west_village', id: hoveredPolygonId },
+                { hover: true }
+            );
+
+            // make the cursor a pointer to let the user know it is clickable
+            map.getCanvas().style.cursor = 'pointer'
+
+            // resets the feature state to the default (nothing is hovered) when the mouse leaves the 'borough-boundaries-fill' layer
+            map.on('mouseleave', 'west_village-fill-2040', () => {
+                // set the featureState of the previous hovered feature to hover:false
+                if (hoveredPolygonId !== null) {
+                    map.setFeatureState(
+                        { source: 'west_village', id: hoveredPolygonId },
+                        { hover: false }
+                    );
+                }
+
+                // clear hoveredPolygonId
+                hoveredPolygonId = null;
+
+                // set the cursor back to default
+                map.getCanvas().style.cursor = ''
+            });
+
+        }
+    });
+
+    // do this for the 2050 layer
     map.on('mousemove', 'west_village-fill-2050', (e) => {
         // don't do anything if there are no features from this layer under the mouse pointer
         if (e.features.length > 0) {
@@ -195,12 +371,13 @@ map.on('load', function () {
 
     // 2024 layer
     map.on('click', 'west_village-fill-2024', (e) => {
-        var penalty = e.features[0].properties['LL84_2024-2029 Penalty']
-        var excess = e.features[0].properties['LL84_2024-2029 Excess Emissions']
-        var address = e.features[0].properties.address
-        var propertyType = e.features[0].properties['LL84_Largest Property Use Type']
+        var penalty = e.features[0].properties['LL84_2024-2029 Penalty'] // grab the penalty amt
+        var excess = e.features[0].properties['LL84_2024-2029 Excess Emissions'] // grab the excess emissions
+        var address = e.features[0].properties.address // grab the address
+        var propertyType = e.features[0].properties['LL84_Largest Property Use Type'] // grab the property type
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
+            // mask the numbers to include comma separators for the numbers
             .setHTML(e.features[0].properties.address + '<p>Property Type: ' + propertyType + '<p>Penalties: $' + penalty.toLocaleString('en-US') + '<p>Excess Emissions (Tons): ' + excess.toLocaleString('en-US'))
             .addTo(map);
     });
@@ -252,17 +429,18 @@ map.on('load', function () {
             .addTo(map);
     });
 
-    // CODE to toggle between layers
-    // listen for a click on a specific button 
+    // Toggle between layers depending on click
+
+    // listen for a click on 2024
     $('#phase2024-button').on('click', function () {
-        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'visible');
-        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
+        map.setLayoutProperty('west_village-fill-2024', 'visibility', 'visible'); // make this layer visible
+        map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none'); // make all other layers invisible
         map.setLayoutProperty('west_village-fill-2035', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2040', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2050', 'visibility', 'none');
     });
 
-    // listen for a click on a specific button 
+    // listen for a click on 2030
     $('#phase2030-button').on('click', function () {
         map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2030', 'visibility', 'visible');
@@ -272,7 +450,7 @@ map.on('load', function () {
         ;
     });
 
-    // listen for a click on a specific button 
+    // listen for a click on 2035
     $('#phase2035-button').on('click', function () {
         map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
@@ -281,7 +459,7 @@ map.on('load', function () {
         map.setLayoutProperty('west_village-fill-2050', 'visibility', 'none');
     });
 
-    // listen for a click on a specific button 
+    // listen for a click on 2040
     $('#phase2040-button').on('click', function () {
         map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
@@ -291,7 +469,7 @@ map.on('load', function () {
         ;
     });
 
-    // listen for a click on a specific button 
+    // listen for a click on 2050
     $('#phase2050-button').on('click', function () {
         map.setLayoutProperty('west_village-fill-2024', 'visibility', 'none');
         map.setLayoutProperty('west_village-fill-2030', 'visibility', 'none');
@@ -301,7 +479,7 @@ map.on('load', function () {
         ;
     });
 
-
+    // click on methodology button to show answer
     $(document).ready(function () {
         $('.question-button').on('click', function () {
             var questionId = $(this).attr('id').replace('question', '');
