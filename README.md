@@ -1,4 +1,4 @@
-<h1>Local Law 97 Building Emissions Penalties</h1>
+<h1>West Village Local Law 97 Building Emissions Penalties</h1>
 NYU Wagner <br>
 Spring 2024 <br>
 Advanced GIS and Web Mapping <br>

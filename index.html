@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Local Law 97 Penalties</title>
+    <title>West Village Local Law 97 Penalties</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
@@ -13,7 +13,7 @@
 <body>
     <div id="main-container">
         <nav>
-            <div class="title">The Road to Zero Emissions: Find Out How Much Your Building May Be Fined Under Local Law
+            <div class="title">The Road to Zero Emissions: Find Out How Much Buildings in the West Village May Be Fined Under Local Law
                 97</div>
             <div class="nav-links">
                 <a class="nav-link" href="https://github.com/lynn-miao/mapping-final-assignment" target="_blank"
@@ -23,7 +23,8 @@
         <div id="content-container">
             <div id="sidebar">
                 Buildings in New York are the largest source of greenhouse gas, contributing 71% of total emissions and
-                94% of electricity consumption. In order for the city to achieve its goal of reducing emissions by 80% by 2050, it must tackle its infrastructure.</p>
+                94% of electricity consumption. In order for the city to achieve its goal of reducing emissions by 80%
+                by 2050, it must tackle its infrastructure.</p>
                 <p>To tackle this problem, City Council passed Local Law 97, which will begin issuing fines in 2024.
                     Buildings larger than 25,000 sq. ft. will be required to reduce their emissions or face increasing
                     penalties. </p>
@@ -43,13 +44,18 @@
                         and square footage in Excel for buildings greater than 25,000 square feet, compared the limit to
                         the permitted amount by property type and square footage, and then calculated the penalties
                         based on the amount of excess emissions. Then I used QGIS and PLUTO to join the penalty and
-                        emissions data aginst City parcels, exported the file into GeoJson, and created this map!
+                        emissions data aginst City parcels, exported the file into GeoJson, and created this map! This map is solely focused on the West Village, but using this same methodology and code, you can recreate this map for other neighborhoods.
                     </p>
                     <p></p>
                     <a href="https://www.nyc.gov/assets/buildings/rules/rule-procedures-greenhouse-gas-emissions-proposed.pdf"
                         target="_blank" rel="nofollow">
                         Link to emissions limits by property type
                     </a>
+                    <p>
+                    <a href="https://docs.google.com/spreadsheets/d/1JZAgJsVIepbdLe8UwAsANj__wu_YbVAQZzIaiSWlVEQ/edit?usp=sharing"
+                        target="_blank" rel="nofollow">
+                        Link to Google Sheet of carbon emissions and penalties for all buildings in NYC
+                    </a></p>
                 </div>
                 <hr />
 
