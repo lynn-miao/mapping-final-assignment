@@ -15,4 +15,7 @@ Local Law 97 issued emission caps for each building calculated based on its type
 To help buildings prepare for this change, City Council also passed Local Law 84, which requires each building to report on their energy and water consumption based on their utility bills, and gives them a score, similar to food health and safety ratings. This way, buildings are aware if they will be impacted Local Law 97, and how far they have to go to reduce emissions below the allowable amount. 
 <br>
 <br>
-To create this web map, I used QGIS, Excel, HTML, CSS, and jQuery in Mapbox GL.
+Due to limitations in GeoJson, this map focuses on the West Village, but using this same codebase and methodology, you should be able to create a similar maps for your desired neighborhoods.
+<br>
+<br>
+<a href="https://lynn-miao.github.io/mapping-final-assignment/"target="_blank" rel="nofollow">To create this web map,</a>  I used QGIS, Excel, HTML, CSS, and jQuery in Mapbox GL. 
